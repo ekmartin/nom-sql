@@ -181,13 +181,13 @@ mod tests {
 
         for (i, e) in lit_ae.iter().enumerate() {
             let res = arithmetic_expression(e.as_bytes());
-            assert!(res.is_done());
+            assert!(res.is_ok());
             assert_eq!(res.unwrap().1, expected_lit_ae[i]);
         }
 
         for (i, e) in col_lit_ae.iter().enumerate() {
             let res = arithmetic_expression(e.as_bytes());
-            assert!(res.is_done());
+            assert!(res.is_ok());
             assert_eq!(res.unwrap().1, expected_col_lit_ae[i]);
         }
     }

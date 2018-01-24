@@ -1017,14 +1017,14 @@ mod tests {
         let t0 = b"(SELECT ol_i_id FROM order_line)";
         let t1 = b"(SELECT ol_i_id FROM order_line) AS ids";
 
-        assert!(join_rhs(t0).is_done());
-        assert!(join_rhs(t1).is_done());
+        assert!(join_rhs(t0).is_ok());
+        assert!(join_rhs(t1).is_ok());
 
         let t0 = b"JOIN (SELECT ol_i_id FROM order_line) ON (orders.o_id = ol_i_id)";
         let t1 = b"JOIN (SELECT ol_i_id FROM order_line) AS ids ON (orders.o_id = ids.ol_i_id)";
 
-        assert!(join_clause(t0).is_done());
-        assert!(join_clause(t1).is_done());
+        assert!(join_clause(t0).is_ok());
+        assert!(join_clause(t1).is_ok());
 
         let qstr_with_alias = "SELECT o_id, ol_i_id FROM orders JOIN \
                                (SELECT ol_i_id FROM order_line) AS ids \

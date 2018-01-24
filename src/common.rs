@@ -648,12 +648,12 @@ mod tests {
         let id5 = b"primary ";
         let id6 = b"`primary`";
 
-        assert!(sql_identifier(id1).is_done());
-        assert!(sql_identifier(id2).is_done());
-        assert!(sql_identifier(id3).is_done());
+        assert!(sql_identifier(id1).is_ok());
+        assert!(sql_identifier(id2).is_ok());
+        assert!(sql_identifier(id3).is_ok());
         assert!(sql_identifier(id4).is_err());
         assert!(sql_identifier(id5).is_err());
-        assert!(sql_identifier(id6).is_done());
+        assert!(sql_identifier(id6).is_ok());
     }
 
     #[test]

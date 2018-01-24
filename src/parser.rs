@@ -1,4 +1,3 @@
-use nom::IResult;
 use std::str;
 use std::fmt;
 
@@ -47,37 +46,37 @@ pub fn parse_query(input: &str) -> Result<SqlQuery, &str> {
 
     // TODO(malte): appropriately pass through errors from nom
     match creation(&q_bytes) {
-        IResult::Done(_, o) => return Ok(SqlQuery::CreateTable(o)),
+        Ok((_, o)) => return Ok(SqlQuery::CreateTable(o)),
         _ => (),
     };
 
     match insertion(&q_bytes) {
-        IResult::Done(_, o) => return Ok(SqlQuery::Insert(o)),
+        Ok((_, o)) => return Ok(SqlQuery::Insert(o)),
         _ => (),
     };
 
     match compound_selection(&q_bytes) {
-        IResult::Done(_, o) => return Ok(SqlQuery::CompoundSelect(o)),
+        Ok((_, o)) => return Ok(SqlQuery::CompoundSelect(o)),
         _ => (),
     };
 
     match selection(&q_bytes) {
-        IResult::Done(_, o) => return Ok(SqlQuery::Select(o)),
+        Ok((_, o)) => return Ok(SqlQuery::Select(o)),
         _ => (),
     };
 
     match deletion(&q_bytes) {
-        IResult::Done(_, o) => return Ok(SqlQuery::Delete(o)),
+        Ok((_, o)) => return Ok(SqlQuery::Delete(o)),
         _ => (),
     };
 
     match updating(&q_bytes) {
-        IResult::Done(_, o) => return Ok(SqlQuery::Update(o)),
+        Ok((_, o)) => return Ok(SqlQuery::Update(o)),
         _ => (),
     };
 
     match set(&q_bytes) {
-        IResult::Done(_, o) => return Ok(SqlQuery::Set(o)),
+        Ok((_, o)) => return Ok(SqlQuery::Set(o)),
         _ => (),
     };
 
